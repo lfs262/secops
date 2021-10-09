@@ -7,9 +7,9 @@ pipeline {
   agent any 
 
   stages {
-    stage('Compliance Scan') {
+    stage('Daily Compliance Run') {
       steps{
-        echo 'Packaging vote app with docker'
+        echo 'Running a compliance scan with inspec....'
           script{
             def remote = [:]
             remote.name = "node-1"
@@ -19,9 +19,13 @@ pipeline {
             withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
                 remote.user = userName
                 remote.identityFile = identity
-                stage("SSH Steps Rocks!") {
+                stage("Scan with inspec") {
                   sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
                   sshCommand remote: remote, command: 'echo "inspec exec /root/linux-baseline/"'
+              }
+                stage("Enforce with Ansible") {
+                  sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
+                  sshCommand remote: remote, command: 'echo "1 2 3"'
               }
             }
           }
