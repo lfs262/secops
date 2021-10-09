@@ -25,7 +25,7 @@ pipeline {
               }
                 stage("Scan with InSpec") {
                   sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
-                  sshCommand remote: remote, command: 'inspec exec /root/linux-baseline/'
+                  sshCommand remote: remote, command: 'inspec exec --no-distinct-exit /root/linux-baseline/'
               }
             }
           }
