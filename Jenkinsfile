@@ -21,7 +21,7 @@ pipeline {
                 remote.identityFile = identity
                 stage("Enforce with Ansible") {
                   sshCommand remote: remote, command: 'cd /root/ansible/ansible-bootcamp-code/chap10/ && git pull origin'
-                  sshCommand remote: remote, command: 'cd /root/ansible/ansible-bootcamp-code/chap10/ && '
+                  sshCommand remote: remote, command: 'cd /root/ansible/ansible-bootcamp-code/chap10/ && ansible-playbook compliance.yaml'
               }
                 stage("Scan with InSpec") {
                   sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
