@@ -1,9 +1,4 @@
 pipeline {
-  environment { 
-    ARGO_SERVER = '35.239.154.108:32100' 
-    DEV_URL = 'http://35.239.154.108:30080/'
-  }
-
   agent any 
 
   stages {
