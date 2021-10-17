@@ -1,0 +1,6 @@
+---
+  # This is a sitewide playbook
+  # filename: site.yml
+  - import_playbook: compliance.yaml
+    tags: secops
+    
