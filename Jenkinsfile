@@ -7,16 +7,16 @@ pipeline {
         echo 'Running a compliance scan with inspec....'
           script{
             def remote = [:]
-            remote.name = "node-1"
-            remote.host = "188.166.208.199"
+            remote.name = "controlnode"
+            remote.host = "xxx.xxx.xxx.xxx"
             remote.allowAnyHosts = true
 
             withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
                 remote.user = userName
                 remote.identityFile = identity
-                stage("Enforce with Ansible") {
-                  sshCommand remote: remote, command: 'cd /root/ansible/ansible-bootcamp-code/chap10/ && git pull origin'
-                  sshCommand remote: remote, command: 'cd /root/ansible/ansible-bootcamp-code/chap10/ && ansible-playbook compliance.yaml'
+                stage("Placeholder Stage...") {
+                  sshCommand remote: remote, command: 'echo "add your stuff here....."'
+                  sshCommand remote: remote, command: 'echo "some more stuff goes here....."'
               }
                 stage("Scan with InSpec") {
                   sshCommand remote: remote, command: 'inspec exec --no-distinct-exit /root/linux-baseline/'
