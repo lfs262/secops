@@ -15,11 +15,11 @@ pipeline {
                 remote.user = userName
                 remote.identityFile = identity
                 stage("Placeholder Stage...") {
-                  sshCommand remote: remote, command: 'echo "add your stuff here....."'
-                  sshCommand remote: remote, command: 'echo "some more stuff goes here....."'
+                  sshCommand remote: remote, sudo: true, command: 'echo "add your stuff here....."'
+                  sshCommand remote: remote, sudo: true, command: 'echo "some more stuff goes here....."'
               }
                 stage("Scan with InSpec") {
-                  sshCommand remote: remote, command: 'inspec exec --no-distinct-exit /root/linux-baseline/'
+                  sshCommand remote: remote, sudo: true, command: 'inspec exec --no-distinct-exit /root/linux-baseline/'
               }
             }
           }
