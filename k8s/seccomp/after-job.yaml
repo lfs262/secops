@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: after-seccomp
+spec:
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - image: r.j3ss.co/amicontained
+        name: chksec
+        resources: {}
+        securityContext:
+          seccompProfile:
+            type: RuntimeDefault
+        command:
+          - "amicontained"
+          - "-d"
+      restartPolicy: Never
+  backoffLimit: 1
+status: {}
